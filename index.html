@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Free & Open Source Software Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for modern sleek aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white pb-24">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-30 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">FOSS Hub</h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">Essential Free & Open Source Software Directory</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Stats -->
+            <div class="flex items-center space-x-2 text-xs">
+                <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="stat-total-count" class="font-semibold text-white">0</span>
+                    <span class="text-slate-400 hidden md:inline">Apps Listed</span>
+                </div>
+                <div class="px-3 py-1.5 rounded-lg bg-indigo-950/60 border border-indigo-800/50 text-indigo-300 font-medium hidden sm:flex items-center space-x-1.5">
+                    <i class="fa-solid fa-terminal text-indigo-400"></i>
+                    <span>Winget Ready</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex-grow w-full">
+        
+        <!-- Hero & Overview Banner -->
+        <section class="mb-8 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 p-6 sm:p-8 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-3xl relative z-10">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-3">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <span>Complete Video & FOSS Software List</span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+                    Discover, Filter & Batch Install Software
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                    Replace expensive proprietary subscriptions with powerful free and open-source software. Select multiple apps to instantly generate a single Windows <code class="px-1.5 py-0.5 rounded bg-slate-800 text-indigo-300 font-mono text-xs">winget install</code> script for batch installation!
+                </p>
+            </div>
+        </section>
+
+        <!-- Controls Bar: Search, Category, Platform, and Options -->
+        <div class="space-y-4 mb-6">
+            <div class="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
+                
+                <!-- Search Box -->
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="search-input" placeholder="Search app name, capability, or proprietary app it replaces (e.g. Photoshop, Premiere, Notion)..." 
+                           class="w-full pl-11 pr-10 py-3 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
+                    <button id="search-clear" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 hidden">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- Toggles & Filters -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Open Source Only Toggle -->
+                    <label class="flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors select-none text-xs font-medium text-slate-300">
+                        <input type="checkbox" id="foss-toggle" class="w-4 h-4 rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-slate-900">
+                        <span><i class="fa-solid fa-code-branch text-emerald-400 mr-1"></i> Open Source Only</span>
+                    </label>
+
+                    <!-- Platform Filters -->
+                    <div class="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1 text-xs">
+                        <button class="platform-btn px-2.5 py-1.5 rounded-lg font-medium transition-colors bg-indigo-600 text-white" data-platform="all">All OS</button>
+                        <button class="platform-btn px-2.5 py-1.5 rounded-lg font-medium text-slate-400 hover:text-slate-200 transition-colors" data-platform="Windows"><i class="fa-brands fa-windows mr-1"></i> Win</button>
+                        <button class="platform-btn px-2.5 py-1.5 rounded-lg font-medium text-slate-400 hover:text-slate-200 transition-colors" data-platform="macOS"><i class="fa-brands fa-apple mr-1"></i> Mac</button>
+                        <button class="platform-btn px-2.5 py-1.5 rounded-lg font-medium text-slate-400 hover:text-slate-200 transition-colors" data-platform="Linux"><i class="fa-brands fa-linux mr-1"></i> Linux</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Pills Navigation -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 pt-1 no-scrollbar text-xs font-medium" id="category-tabs">
+                <!-- Categories rendered via JS -->
+            </div>
+        </div>
+
+        <!-- Results Info Bar -->
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-4 px-1">
+            <div>
+                Showing <span id="visible-count" class="font-bold text-slate-200">0</span> applications
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="btn-select-all" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-square-check mr-1"></i> Select Visible</button>
+                <button id="btn-clear-all" class="hover:text-pink-400 transition-colors"><i class="fa-solid fa-square-xmark mr-1"></i> Clear Selection</button>
+            </div>
+        </div>
+
+        <!-- Software Grid -->
+        <div id="apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <!-- App Cards render here dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden py-16 text-center">
+            <div class="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-slate-500 mb-4 text-2xl">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="text-base font-semibold text-slate-300">No software found</h3>
+            <p class="text-xs text-slate-500 mt-1">Try adjusting your search query or removing active filters.</p>
+        </div>
+    </main>
+
+    <!-- Floating Batch Selection Bar (Appears when >= 1 app is selected) -->
+    <div id="floating-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 max-w-2xl w-[92%] glass-panel rounded-2xl p-4 shadow-2xl border border-indigo-500/30 transform translate-y-32 opacity-0 transition-all duration-300 ease-out flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center font-bold text-base">
+                <span id="selected-badge-count">0</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-white"><span id="selected-text-count">0</span> Applications Selected</p>
+                <p class="text-[11px] text-slate-400">Ready to batch install or export</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2 w-full sm:w-auto">
+            <button id="btn-export-list" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors flex items-center justify-center space-x-1.5">
+                <i class="fa-solid fa-download"></i>
+                <span>Export List</span>
+            </button>
+            <button id="btn-generate-winget" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-colors flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-terminal"></i>
+                <span>Winget Command</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Winget Script Generator -->
+    <div id="winget-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Batch Winget Installer</h3>
+                        <p class="text-xs text-slate-400">Windows Package Manager Script</p>
+                    </div>
+                </div>
+                <button id="modal-close-winget" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="py-4 space-y-4 overflow-y-auto flex-1">
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Copy and paste this command into <strong>PowerShell</strong> or <strong>Command Prompt</strong> on Windows 10/11 to install all selected apps automatically:
+                </p>
+
+                <!-- Options -->
+                <div class="flex items-center space-x-4 bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs">
+                    <label class="flex items-center space-x-2 cursor-pointer select-none">
+                        <input type="checkbox" id="winget-opt-silent" class="w-4 h-4 rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-indigo-500">
+                        <span class="text-slate-300">Silent Install (<code class="text-indigo-400">--silent</code>)</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer select-none">
+                        <input type="checkbox" id="winget-opt-agreements" checked class="w-4 h-4 rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-indigo-500">
+                        <span class="text-slate-300">Accept License Agreements</span>
+                    </label>
+                </div>
+
+                <!-- Code Terminal Output -->
+                <div class="relative bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs text-indigo-300 overflow-x-auto select-all">
+                    <pre id="winget-code-output" class="whitespace-pre-wrap break-all leading-relaxed"></pre>
+                </div>
+
+                <p class="text-[11px] text-slate-500">
+                    * Note: Software that lacks a official Winget ID will be skipped in this command.
+                </p>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-end space-x-3">
+                <button id="btn-download-bat" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span>Download .bat File</span>
+                </button>
+                <button id="btn-copy-winget" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors flex items-center space-x-2 shadow-lg shadow-indigo-600/30">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copy Command</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Detail View -->
+    <div id="detail-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button id="modal-close-detail" class="absolute right-4 top-4 w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="detail-modal-body">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+    <script>
+        // Full Dataset containing all 45+ Video Software + Key FOSS Additions
+        const SOFTWARE_DATA = [
+            // --- OFFICE & NOTES ---
+            {
+                id: 'libreoffice',
+                name: 'LibreOffice',
+                icon: 'fa-file-lines',
+                category: 'office',
+                desc: 'Comprehensive, free and open-source office suite featuring Writer, Calc, Impress, and Draw.',
+                replaces: 'Microsoft Office / 365',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.libreoffice.org',
+                wingetId: 'TheDocumentFoundation.LibreOffice',
+                videoTimestamp: '02:05'
+            },
+            {
+                id: 'obsidian',
+                name: 'Obsidian',
+                icon: 'fa-brain',
+                category: 'office',
+                desc: 'Powerful knowledge base and note-taking app operating on local Markdown files.',
+                replaces: 'Notion / Roam Research',
+                license: 'Free',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://obsidian.md',
+                wingetId: 'Obsidian.Obsidian',
+                videoTimestamp: '14:24'
+            },
+            {
+                id: 'thunderbird',
+                name: 'Thunderbird',
+                icon: 'fa-envelope-open-text',
+                category: 'office',
+                desc: 'Free email, calendaring, tasks, and newsfeed client developed by Mozilla.',
+                replaces: 'Microsoft Outlook',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.thunderbird.net',
+                wingetId: 'Mozilla.Thunderbird',
+                videoTimestamp: '28:30'
+            },
+            {
+                id: 'calibre',
+                name: 'Calibre',
+                icon: 'fa-book-open',
+                category: 'office',
+                desc: 'Powerful open-source e-book manager, converter, and reader suite.',
+                replaces: 'Kindle Desktop / Apple Books',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://calibre-ebook.com',
+                wingetId: 'calibre.calibre',
+                videoTimestamp: '29:44'
+            },
+            {
+                id: 'joplin',
+                name: 'Joplin',
+                icon: 'fa-note-sticky',
+                category: 'office',
+                desc: 'Secure note-taking and to-do application with end-to-end encryption.',
+                replaces: 'Evernote',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://joplinapp.org',
+                wingetId: 'Joplin.Joplin',
+                videoTimestamp: '31:01'
+            },
+            {
+                id: 'pdf24',
+                name: 'PDF24 Creator',
+                icon: 'fa-file-pdf',
+                category: 'office',
+                desc: 'All-in-one PDF desktop solution to merge, split, compress, edit, and convert PDF files.',
+                replaces: 'Adobe Acrobat Pro',
+                license: 'Free',
+                platforms: ['Windows'],
+                website: 'https://www.pdf24.org',
+                wingetId: 'geekSoftwareGmbH.PDF24Creator',
+                videoTimestamp: '38:13'
+            },
+            {
+                id: 'notepadplusplus',
+                name: 'Notepad++',
+                icon: 'fa-code font-bold',
+                category: 'office',
+                desc: 'Extremely fast, lightweight source code editor and Notepad replacement.',
+                replaces: 'Windows Notepad / UltraEdit',
+                license: 'Open Source',
+                platforms: ['Windows'],
+                website: 'https://notepad-plus-plus.org',
+                wingetId: 'Notepad++.Notepad++',
+                videoTimestamp: '41:41'
+            },
+            {
+                id: 'scribus',
+                name: 'Scribus',
+                icon: 'fa-newspaper',
+                category: 'office',
+                desc: 'Desktop publishing (DTP) application for magazine, brochure, and newsletter design.',
+                replaces: 'Adobe InDesign',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.scribus.net',
+                wingetId: 'Scribus.Scribus',
+                videoTimestamp: '54:12'
+            },
+
+            // --- VIDEO & AUDIO ---
+            {
+                id: 'vlc',
+                name: 'VLC Media Player',
+                icon: 'fa-cone-striped text-amber-400',
+                category: 'video-audio',
+                desc: 'Universally popular open-source media player that plays virtually any video format.',
+                replaces: 'QuickTime / Windows Media Player',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.videolan.org/vlc',
+                wingetId: 'VideoLAN.VLC',
+                videoTimestamp: '04:01'
+            },
+            {
+                id: 'davinci-resolve',
+                name: 'DaVinci Resolve',
+                icon: 'fa-film text-purple-400',
+                category: 'video-audio',
+                desc: 'Hollywood-grade video editing, color correction, visual effects, and audio post-production.',
+                replaces: 'Adobe Premiere Pro',
+                license: 'Freemium',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.blackmagicdesign.com/products/davinciresolve',
+                wingetId: 'BlackmagicDesign.DaVinciResolve',
+                videoTimestamp: '05:42'
+            },
+            {
+                id: 'obs-studio',
+                name: 'OBS Studio',
+                icon: 'fa-video text-blue-400',
+                category: 'video-audio',
+                desc: 'Industry standard for live video streaming and high-performance screen recording.',
+                replaces: 'Camtasia / Streamlabs',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://obsproject.com',
+                wingetId: 'OBSProject.OBSStudio',
+                videoTimestamp: '07:39'
+            },
+            {
+                id: 'audacity',
+                name: 'Audacity',
+                icon: 'fa-waveform',
+                category: 'video-audio',
+                desc: 'Multi-track audio editor and sound recorder for podcasting and vocal editing.',
+                replaces: 'Adobe Audition',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.audacityteam.org',
+                wingetId: 'Audacity.Audacity',
+                videoTimestamp: '11:01'
+            },
+            {
+                id: 'lmms',
+                name: 'LMMS',
+                icon: 'fa-sliders',
+                category: 'video-audio',
+                desc: 'Digital Audio Workstation (DAW) for creating music with synthesized sounds and samples.',
+                replaces: 'FL Studio',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://lmms.io',
+                wingetId: 'LMMS.LMMS',
+                videoTimestamp: '23:56'
+            },
+            {
+                id: 'shotcut',
+                name: 'Shotcut',
+                icon: 'fa-clapperboard',
+                category: 'video-audio',
+                desc: 'Free, open-source video editor with wide format support and clean timeline control.',
+                replaces: 'Premiere Pro / Filmora',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://shotcut.org',
+                wingetId: 'Meltytech.Shotcut',
+                videoTimestamp: '25:23'
+            },
+            {
+                id: 'kdenlive',
+                name: 'Kdenlive',
+                icon: 'fa-photo-film',
+                category: 'video-audio',
+                desc: 'Advanced non-linear video editor built on MLT Framework with custom effects and titling.',
+                replaces: 'Adobe Premiere Pro',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://kdenlive.org',
+                wingetId: 'KDE.Kdenlive',
+                videoTimestamp: '25:23'
+            },
+            {
+                id: 'mpv',
+                name: 'MPV Player',
+                icon: 'fa-play',
+                category: 'video-audio',
+                desc: 'Extremely lightweight, high-performance media player with modern GPU video decoding.',
+                replaces: 'Basic Media Players',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://mpv.io',
+                wingetId: 'shinchiro.mpv',
+                videoTimestamp: '32:34'
+            },
+            {
+                id: 'ardour',
+                name: 'Ardour',
+                icon: 'fa-compact-disc',
+                category: 'video-audio',
+                desc: 'Professional digital audio workstation designed for audio engineers and musicians.',
+                replaces: 'Pro Tools / Logic Pro',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://ardour.org',
+                wingetId: 'Ardour.Ardour',
+                videoTimestamp: '43:52'
+            },
+            {
+                id: 'handbrake',
+                name: 'HandBrake',
+                icon: 'fa-file-video',
+                category: 'video-audio',
+                desc: 'Open-source video transcoder to convert videos into modern, optimized formats.',
+                replaces: 'Adobe Media Encoder',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://handbrake.fr',
+                wingetId: 'HandBrake.HandBrake',
+                videoTimestamp: '54:46'
+            },
+
+            // --- DESIGN & 3D ---
+            {
+                id: 'gimp',
+                name: 'GIMP',
+                icon: 'fa-image text-cyan-400',
+                category: 'design-3d',
+                desc: 'Versatile image editor for photo retouching, image composition, and graphic design.',
+                replaces: 'Adobe Photoshop',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.gimp.org',
+                wingetId: 'GIMP.GIMP',
+                videoTimestamp: '09:22'
+            },
+            {
+                id: 'blender',
+                name: 'Blender',
+                icon: 'fa-cubes text-orange-400',
+                category: 'design-3d',
+                desc: 'Complete 3D creation suite supporting modeling, rigging, animation, simulation, and rendering.',
+                replaces: 'Autodesk Maya / 3ds Max',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.blender.org',
+                wingetId: 'BlenderFoundation.Blender',
+                videoTimestamp: '12:42'
+            },
+            {
+                id: 'krita',
+                name: 'Krita',
+                icon: 'fa-paintbrush text-pink-400',
+                category: 'design-3d',
+                desc: 'Professional digital painting, concept art, and 2D animation software created by artists.',
+                replaces: 'Photoshop / Corel Painter',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://krita.org',
+                wingetId: 'KDE.Krita',
+                videoTimestamp: '19:10'
+            },
+            {
+                id: 'photopea',
+                name: 'Photopea',
+                icon: 'fa-globe text-teal-400',
+                category: 'design-3d',
+                desc: 'Full-featured web-based image editor supporting PSD, AI, Sketch, and XCF formats in-browser.',
+                replaces: 'Adobe Photoshop',
+                license: 'Free',
+                platforms: ['Web'],
+                website: 'https://www.photopea.com',
+                wingetId: null,
+                videoTimestamp: '20:45'
+            },
+            {
+                id: 'inkscape',
+                name: 'Inkscape',
+                icon: 'fa-pen-nib text-indigo-400',
+                category: 'design-3d',
+                desc: 'Professional vector graphics editor for creating illustrations, logos, and typography.',
+                replaces: 'Adobe Illustrator',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://inkscape.org',
+                wingetId: 'Inkscape.Inkscape',
+                videoTimestamp: '22:13'
+            },
+            {
+                id: 'affinity',
+                name: 'Affinity Suite',
+                icon: 'fa-bezier-curve',
+                category: 'design-3d',
+                desc: 'High-performance creative desktop suite for vector illustration, photo editing, and publishing.',
+                replaces: 'Adobe Creative Cloud',
+                license: 'Freemium',
+                platforms: ['Windows', 'macOS'],
+                website: 'https://affinity.serif.com',
+                wingetId: 'Serif.AffinityPublisher2',
+                videoTimestamp: '33:58'
+            },
+            {
+                id: 'freecad',
+                name: 'FreeCAD',
+                icon: 'fa-drafting-table',
+                category: 'design-3d',
+                desc: 'Parametric 3D CAD modeler for mechanical engineering, product design, and architecture.',
+                replaces: 'AutoCAD / SolidWorks',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.freecad.org',
+                wingetId: 'FreeCAD.FreeCAD',
+                videoTimestamp: '42:52'
+            },
+            {
+                id: 'penpot',
+                name: 'Penpot',
+                icon: 'fa-layer-group',
+                category: 'design-3d',
+                desc: 'Open-source web-based prototyping and UI/UX design workspace built for cross-functional teams.',
+                replaces: 'Figma',
+                license: 'Open Source',
+                platforms: ['Web'],
+                website: 'https://penpot.app',
+                wingetId: null,
+                videoTimestamp: '49:04'
+            },
+
+            // --- DEVELOPMENT & GAMES ---
+            {
+                id: 'scratch',
+                name: 'Scratch',
+                icon: 'fa-shapes text-yellow-400',
+                category: 'dev-games',
+                desc: 'Visual block-based programming language for beginners and kids to build interactive games.',
+                replaces: 'Paid Coding Kits',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Web'],
+                website: 'https://scratch.mit.edu',
+                wingetId: 'MIT.Scratch.3',
+                videoTimestamp: '15:55'
+            },
+            {
+                id: 'godot',
+                name: 'Godot Engine',
+                icon: 'fa-gamepad text-cyan-400',
+                category: 'dev-games',
+                desc: 'Feature-packed, cross-platform 2D and 3D game engine with lightweight architecture.',
+                replaces: 'Unity / Unreal Engine',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://godotengine.org',
+                wingetId: 'GodotEngine.GodotEngine',
+                videoTimestamp: '17:39'
+            },
+            {
+                id: 'virtualbox',
+                name: 'VirtualBox',
+                icon: 'fa-server text-blue-400',
+                category: 'dev-games',
+                desc: 'Enterprise-grade x86 and AMD64/Intel64 virtualization software for operating systems.',
+                replaces: 'VMware Workstation',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.virtualbox.org',
+                wingetId: 'Oracle.VirtualBox',
+                videoTimestamp: '40:26'
+            },
+            {
+                id: 'vscodium',
+                name: 'VSCodium',
+                icon: 'fa-code-branch text-emerald-400',
+                category: 'dev-games',
+                desc: 'Community-driven, telemetry-free distribution of Microsoft VS Code code editor.',
+                replaces: 'VS Code / Sublime Text',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://vscodium.com',
+                wingetId: 'VSCodium.VSCodium',
+                videoTimestamp: '53:09'
+            },
+
+            // --- SECURITY & PRIVACY ---
+            {
+                id: 'keepassxc',
+                name: 'KeePassXC',
+                icon: 'fa-key text-emerald-400',
+                category: 'security',
+                desc: 'Secure, offline cross-platform password manager stored locally on your hard drive.',
+                replaces: '1Password / LastPass',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://keepassxc.org',
+                wingetId: 'KeePassXCTeam.KeePassXC',
+                videoTimestamp: '27:00'
+            },
+            {
+                id: 'protonvpn',
+                name: 'ProtonVPN',
+                icon: 'fa-shield-halved text-purple-400',
+                category: 'security',
+                desc: 'High-speed Swiss VPN safeguarding privacy with a strict no-logs policy.',
+                replaces: 'ExpressVPN / NordVPN',
+                license: 'Freemium',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://protonvpn.com',
+                wingetId: 'Proton.ProtonVPN',
+                videoTimestamp: '35:41'
+            },
+            {
+                id: 'bitwarden',
+                name: 'Bitwarden',
+                icon: 'fa-lock text-blue-400',
+                category: 'security',
+                desc: 'Encrypted cloud-synced password manager for personal and enterprise use.',
+                replaces: '1Password / LastPass',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux', 'Web'],
+                website: 'https://bitwarden.com',
+                wingetId: 'Bitwarden.Bitwarden',
+                videoTimestamp: '36:48'
+            },
+            {
+                id: 'protonpass',
+                name: 'Proton Pass',
+                icon: 'fa-user-shield text-indigo-400',
+                category: 'security',
+                desc: 'Encrypted password manager with email hide-aliases and 2FA authentication.',
+                replaces: '1Password / Dashlane',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux', 'Web'],
+                website: 'https://proton.me/pass',
+                wingetId: 'Proton.ProtonPass',
+                videoTimestamp: '50:13'
+            },
+            {
+                id: 'cryptomator',
+                name: 'Cryptomator',
+                icon: 'fa-vault text-amber-400',
+                category: 'security',
+                desc: 'Multi-platform client-side transparent encryption for your cloud files.',
+                replaces: 'Boxcryptor',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://cryptomator.org',
+                wingetId: 'Cryptomator.Cryptomator',
+                videoTimestamp: 'Extra'
+            },
+            {
+                id: 'signal',
+                name: 'Signal',
+                icon: 'fa-comment-dots text-blue-400',
+                category: 'security',
+                desc: 'Private messenger with state-of-the-art end-to-end encryption.',
+                replaces: 'WhatsApp / Telegram',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://signal.org',
+                wingetId: 'Signal.Signal',
+                videoTimestamp: 'Extra'
+            },
+
+            // --- SYSTEM & UTILITIES ---
+            {
+                id: 'winrar',
+                name: 'WinRAR',
+                icon: 'fa-box-archive text-violet-400',
+                category: 'utility',
+                desc: 'Classic archive manager software utility supporting RAR, ZIP and compressed files.',
+                replaces: 'Paid Compression Tools',
+                license: 'Freemium',
+                platforms: ['Windows'],
+                website: 'https://www.win-rar.com',
+                wingetId: 'RARLab.WinRAR',
+                videoTimestamp: '45:07'
+            },
+            {
+                id: 'everything',
+                name: 'Everything',
+                icon: 'fa-bolt text-yellow-400',
+                category: 'utility',
+                desc: 'Lightning-fast Windows desktop file search engine that locates files in milliseconds.',
+                replaces: 'Windows Default Search',
+                license: 'Free',
+                platforms: ['Windows'],
+                website: 'https://www.voidtools.com',
+                wingetId: 'voidtools.Everything',
+                videoTimestamp: '46:22'
+            },
+            {
+                id: '7zip',
+                name: '7-Zip',
+                icon: 'fa-file-zipper text-emerald-400',
+                category: 'utility',
+                desc: 'High compression ratio file archiver for 7z, ZIP, TAR, and RAR files.',
+                replaces: 'WinRAR / WinZip',
+                license: 'Open Source',
+                platforms: ['Windows', 'Linux'],
+                website: 'https://www.7-zip.org',
+                wingetId: '7zip.7zip',
+                videoTimestamp: '55:28'
+            },
+            {
+                id: 'sharex',
+                name: 'ShareX',
+                icon: 'fa-crop-simple text-sky-400',
+                category: 'utility',
+                desc: 'Screen capture, file sharing and productivity utility with automated workflows.',
+                replaces: 'Snagit / Lightshot',
+                license: 'Open Source',
+                platforms: ['Windows'],
+                website: 'https://getsharex.com',
+                wingetId: 'ShareX.ShareX',
+                videoTimestamp: '56:13'
+            },
+            {
+                id: 'totalcommander',
+                name: 'Total Commander',
+                icon: 'fa-folder-tree text-indigo-400',
+                category: 'utility',
+                desc: 'Advanced dual-pane file manager for Windows with deep archive and FTP support.',
+                replaces: 'Windows File Explorer',
+                license: 'Free',
+                platforms: ['Windows'],
+                website: 'https://www.ghisler.com',
+                wingetId: 'Ghisler.TotalCommander',
+                videoTimestamp: '57:20'
+            },
+            {
+                id: 'rufus',
+                name: 'Rufus',
+                icon: 'fa-usb text-cyan-400',
+                category: 'utility',
+                desc: 'Fast utility that formats and creates bootable USB flash drives from ISO images.',
+                replaces: 'Paid ISO Burners',
+                license: 'Open Source',
+                platforms: ['Windows'],
+                website: 'https://rufus.ie',
+                wingetId: 'Rufus.Rufus',
+                videoTimestamp: 'Extra'
+            },
+            {
+                id: 'ventoy',
+                name: 'Ventoy',
+                icon: 'fa-hard-drive text-teal-400',
+                category: 'utility',
+                desc: 'Bootable USB creation tool allowing you to boot directly from multiple ISO files on one drive.',
+                replaces: 'Rufus / YUMI',
+                license: 'Open Source',
+                platforms: ['Windows', 'Linux'],
+                website: 'https://www.ventoy.net',
+                wingetId: 'ventoy.Ventoy',
+                videoTimestamp: 'Extra'
+            },
+            {
+                id: 'bleachbit',
+                name: 'BleachBit',
+                icon: 'fa-broom text-rose-400',
+                category: 'utility',
+                desc: 'System cleaner that frees disk space and guards privacy by wiping cache, cookies, and logs.',
+                replaces: 'CCleaner',
+                license: 'Open Source',
+                platforms: ['Windows', 'Linux'],
+                website: 'https://www.bleachbit.org',
+                wingetId: 'BleachBit.BleachBit',
+                videoTimestamp: 'Extra'
+            },
+
+            // --- NETWORK & SHARING ---
+            {
+                id: 'localsend',
+                name: 'LocalSend',
+                icon: 'fa-wifi text-emerald-400',
+                category: 'network',
+                desc: 'Cross-platform AirDrop alternative for sharing files locally without internet.',
+                replaces: 'Apple AirDrop / Nearby Share',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://localsend.org',
+                wingetId: 'LocalSend.LocalSend',
+                videoTimestamp: '39:20'
+            },
+            {
+                id: 'syncthing',
+                name: 'Syncthing',
+                icon: 'fa-arrows-rotate text-blue-400',
+                category: 'network',
+                desc: 'Continuous peer-to-peer file synchronization program between multiple devices.',
+                replaces: 'Dropbox / Resilio Sync',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://syncthing.net',
+                wingetId: 'Syncthing.Syncthing',
+                videoTimestamp: '47:46'
+            },
+            {
+                id: 'kdeconnect',
+                name: 'KDE Connect',
+                icon: 'fa-mobile-screen-button text-indigo-400',
+                category: 'network',
+                desc: 'Seamless phone-to-computer integration for shared clipboard, SMS, and notifications.',
+                replaces: 'Phone Link / Apple Handoff',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://kdeconnect.kde.org',
+                wingetId: 'KDE.KDEConnect',
+                videoTimestamp: '51:16'
+            },
+            {
+                id: 'parsec',
+                name: 'Parsec',
+                icon: 'fa-display text-pink-400',
+                category: 'network',
+                desc: 'Ultra low latency, high frame rate remote desktop and cloud gaming platform.',
+                replaces: 'TeamViewer / AnyDesk',
+                license: 'Freemium',
+                platforms: ['Windows', 'macOS'],
+                website: 'https://parsec.app',
+                wingetId: 'Parsec.Parsec',
+                videoTimestamp: '52:02'
+            },
+            {
+                id: 'qbittorrent',
+                name: 'qBittorrent',
+                icon: 'fa-download text-teal-400',
+                category: 'network',
+                desc: 'Clean, ad-free BitTorrent client with integrated search engine and remote control.',
+                replaces: 'uTorrent / BitTorrent',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.qbittorrent.org',
+                wingetId: 'qBittorrent.qBittorrent',
+                videoTimestamp: '56:47'
+            },
+            {
+                id: 'fdm',
+                name: 'Free Download Manager',
+                icon: 'fa-arrow-down-long text-sky-400',
+                category: 'network',
+                desc: 'Powerful download accelerator and manager supporting web streams and torrents.',
+                replaces: 'Internet Download Manager (IDM)',
+                license: 'Free',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.freedownloadmanager.org',
+                wingetId: 'SoftDeluxe.FreeDownloadManager',
+                videoTimestamp: '57:20'
+            },
+            {
+                id: 'rustdesk',
+                name: 'RustDesk',
+                icon: 'fa-desktop text-orange-400',
+                category: 'network',
+                desc: 'Open-source remote desktop software alternative with full self-hosting support.',
+                replaces: 'TeamViewer / AnyDesk',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://rustdesk.com',
+                wingetId: 'RustDesk.RustDesk',
+                videoTimestamp: 'Extra'
+            },
+            {
+                id: 'firefox',
+                name: 'Mozilla Firefox',
+                icon: 'fa-globe text-amber-500',
+                category: 'network',
+                desc: 'Fast, independent, and privacy-focused open-source web browser.',
+                replaces: 'Google Chrome / Edge',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://www.mozilla.org/firefox',
+                wingetId: 'Mozilla.Firefox',
+                videoTimestamp: 'Extra'
+            },
+            {
+                id: 'brave',
+                name: 'Brave Browser',
+                icon: 'fa-shield-cat text-orange-400',
+                category: 'network',
+                desc: 'Privacy-first web browser blocking trackers and ads automatically by default.',
+                replaces: 'Google Chrome',
+                license: 'Open Source',
+                platforms: ['Windows', 'macOS', 'Linux'],
+                website: 'https://brave.com',
+                wingetId: 'Brave.Brave',
+                videoTimestamp: 'Extra'
+            }
+        ];
+
+        // Categories Map
+        const CATEGORIES = [
+            { id: 'all', label: 'All Software', icon: 'fa-layer-group' },
+            { id: 'office', label: 'Office & Notes', icon: 'fa-file-signature' },
+            { id: 'video-audio', label: 'Video & Audio', icon: 'fa-photo-film' },
+            { id: 'design-3d', label: 'Design & 3D', icon: 'fa-palette' },
+            { id: 'dev-games', label: 'Dev & Games', icon: 'fa-terminal' },
+            { id: 'security', label: 'Security & Privacy', icon: 'fa-shield-halved' },
+            { id: 'utility', label: 'System & Utilities', icon: 'fa-gears' },
+            { id: 'network', label: 'Network & Sharing', icon: 'fa-network-wired' }
+        ];
+
+        // Application State
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let fossOnly = false;
+        let selectedPlatform = 'all';
+        const selectedApps = new Set();
+
+        // DOM Element Cache
+        const searchInput = document.getElementById('search-input');
+        const searchClear = document.getElementById('search-clear');
+        const fossToggle = document.getElementById('foss-toggle');
+        const categoryTabsContainer = document.getElementById('category-tabs');
+        const appsGrid = document.getElementById('apps-grid');
+        const emptyState = document.getElementById('empty-state');
+        const visibleCountEl = document.getElementById('visible-count');
+        const statTotalCountEl = document.getElementById('stat-total-count');
+        const floatingDock = document.getElementById('floating-dock');
+        const selectedBadgeCount = document.getElementById('selected-badge-count');
+        const selectedTextCount = document.getElementById('selected-text-count');
+        const wingetModal = document.getElementById('winget-modal');
+        const detailModal = document.getElementById('detail-modal');
+        const wingetCodeOutput = document.getElementById('winget-code-output');
+
+        // Initialize App
+        function initApp() {
+            statTotalCountEl.textContent = SOFTWARE_DATA.length;
+            renderCategoryTabs();
+            renderAppCards();
+            setupEventListeners();
+        }
+
+        // Render Category Tabs
+        function renderCategoryTabs() {
+            categoryTabsContainer.innerHTML = CATEGORIES.map(cat => {
+                const count = cat.id === 'all' 
+                    ? SOFTWARE_DATA.length 
+                    : SOFTWARE_DATA.filter(item => item.category === cat.id).length;
+
+                const isActive = activeCategory === cat.id;
+                return `
+                    <button class="cat-tab px-3.5 py-2 rounded-xl border flex items-center space-x-2 transition-all whitespace-nowrap cursor-pointer ${
+                        isActive 
+                        ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-600/20' 
+                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                    }" data-category="${cat.id}">
+                        <i class="fa-solid ${cat.icon}"></i>
+                        <span>${cat.label}</span>
+                        <span class="px-1.5 py-0.5 rounded-md text-[10px] ${
+                            isActive ? 'bg-indigo-800 text-indigo-100' : 'bg-slate-800 text-slate-400'
+                        }">${count}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // Filter Software List
+        function getFilteredApps() {
+            return SOFTWARE_DATA.filter(app => {
+                // Category Filter
+                if (activeCategory !== 'all' && app.category !== activeCategory) return false;
+
+                // FOSS Only Filter
+                if (fossOnly && app.license !== 'Open Source') return false;
+
+                // Platform Filter
+                if (selectedPlatform !== 'all' && !app.platforms.includes(selectedPlatform)) return false;
+
+                // Search Filter
+                if (searchQuery.trim() !== '') {
+                    const q = searchQuery.toLowerCase();
+                    const matchName = app.name.toLowerCase().includes(q);
+                    const matchDesc = app.desc.toLowerCase().includes(q);
+                    const matchReplaces = app.replaces.toLowerCase().includes(q);
+                    return matchName || matchDesc || matchReplaces;
+                }
+
+                return true;
+            });
+        }
+
+        // Render App Cards
+        function renderAppCards() {
+            const filtered = getFilteredApps();
+            visibleCountEl.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                appsGrid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            appsGrid.innerHTML = filtered.map(app => {
+                const isSelected = selectedApps.has(app.id);
+
+                // Badge Styles
+                let licenseBadgeClass = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+                if (app.license === 'Free') licenseBadgeClass = 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+                if (app.license === 'Freemium') licenseBadgeClass = 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+
+                return `
+                    <div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative group ${
+                        isSelected ? 'ring-2 ring-indigo-500/80 bg-indigo-950/20' : ''
+                    }" data-app-id="${app.id}">
+                        
+                        <div>
+                            <!-- Card Header -->
+                            <div class="flex items-start justify-between gap-3 mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-lg text-indigo-400 shadow-inner">
+                                        <i class="fa-solid ${app.icon}"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors">${app.name}</h3>
+                                        <div class="flex items-center space-x-1.5 mt-0.5">
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${licenseBadgeClass}">
+                                                ${app.license}
+                                            </span>
+                                            ${app.videoTimestamp ? `
+                                                <span class="text-[10px] text-slate-500 font-mono" title="Video timestamp">
+                                                    <i class="fa-solid fa-play text-[8px]"></i> ${app.videoTimestamp}
+                                                </span>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Selection Checkbox -->
+                                <button class="btn-toggle-select w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${
+                                    isSelected 
+                                    ? 'bg-indigo-600 border-indigo-500 text-white' 
+                                    : 'border-slate-700 hover:border-slate-500 text-transparent bg-slate-900/80'
+                                }" title="Select for Winget script">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </button>
+                            </div>
+
+                            <!-- Replaces Tag -->
+                            <div class="mb-2 text-[11px] font-medium text-slate-400 bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1 inline-block">
+                                <span class="text-indigo-400">⇄ Replaces:</span> ${app.replaces}
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4 line-clamp-2">
+                                ${app.desc}
+                            </p>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                            <!-- Platform Badges -->
+                            <div class="flex items-center space-x-2 text-slate-400 text-[11px]">
+                                ${app.platforms.map(p => {
+                                    let icon = 'fa-desktop';
+                                    if (p === 'Windows') icon = 'fa-windows';
+                                    if (p === 'macOS') icon = 'fa-apple';
+                                    if (p === 'Linux') icon = 'fa-linux';
+                                    if (p === 'Web') icon = 'fa-globe';
+                                    return `<span title="${p}"><i class="fa-brands ${icon} text-slate-400"></i></span>`;
+                                }).join('')}
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex items-center space-x-2">
+                                <button class="btn-open-detail text-slate-400 hover:text-white px-2 py-1 rounded hover:bg-slate-800 transition-colors">
+                                    Details
+                                </button>
+                                <a href="${app.website}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 px-2 py-1 rounded hover:bg-indigo-950/50 transition-colors flex items-center space-x-1">
+                                    <span>Website</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            attachCardEventListeners();
+        }
+
+        // Attach Card Listeners
+        function attachCardEventListeners() {
+            document.querySelectorAll('.glass-card').forEach(card => {
+                const appId = card.dataset.appId;
+                const app = SOFTWARE_DATA.find(a => a.id === appId);
+
+                // Select Checkbox Toggle
+                const selectBtn = card.querySelector('.btn-toggle-select');
+                selectBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleAppSelection(appId);
+                });
+
+                // Open Detail Modal
+                const detailBtn = card.querySelector('.btn-open-detail');
+                detailBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openDetailModal(app);
+                });
+            });
+        }
+
+        // Toggle Selection
+        function toggleAppSelection(appId) {
+            if (selectedApps.has(appId)) {
+                selectedApps.delete(appId);
+            } else {
+                selectedApps.add(appId);
+            }
+            updateFloatingDock();
+            renderAppCards();
+        }
+
+        // Update Dock Visibility & Counters
+        function updateFloatingDock() {
+            const count = selectedApps.size;
+            selectedBadgeCount.textContent = count;
+            selectedTextCount.textContent = count;
+
+            if (count > 0) {
+                floatingDock.classList.remove('translate-y-32', 'opacity-0');
+                floatingDock.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                floatingDock.classList.remove('translate-y-0', 'opacity-100');
+                floatingDock.classList.add('translate-y-32', 'opacity-0');
+            }
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Search Input Listener
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                searchClear.classList.toggle('hidden', searchQuery === '');
+                renderAppCards();
+            });
+
+            // Search Clear Button
+            searchClear.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                searchClear.classList.add('hidden');
+                renderAppCards();
+            });
+
+            // FOSS Toggle Listener
+            fossToggle.addEventListener('change', (e) => {
+                fossOnly = e.target.checked;
+                renderAppCards();
+            });
+
+            // Category Tab Click
+            categoryTabsContainer.addEventListener('click', (e) => {
+                const tab = e.target.closest('.cat-tab');
+                if (!tab) return;
+                activeCategory = tab.dataset.category;
+                renderCategoryTabs();
+                renderAppCards();
+            });
+
+            // Platform Filter Buttons
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.platform-btn').forEach(b => {
+                        b.classList.remove('bg-indigo-600', 'text-white');
+                        b.classList.add('text-slate-400');
+                    });
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    btn.classList.remove('text-slate-400');
+                    selectedPlatform = btn.dataset.platform;
+                    renderAppCards();
+                });
+            });
+
+            // Select All Visible
+            document.getElementById('btn-select-all').addEventListener('click', () => {
+                getFilteredApps().forEach(app => selectedApps.add(app.id));
+                updateFloatingDock();
+                renderAppCards();
+                showToast(`Selected all ${getFilteredApps().length} visible apps`);
+            });
+
+            // Clear Selection
+            document.getElementById('btn-clear-all').addEventListener('click', () => {
+                selectedApps.clear();
+                updateFloatingDock();
+                renderAppCards();
+                showToast('Cleared app selection');
+            });
+
+            // Generate Winget Script Modal
+            document.getElementById('btn-generate-winget').addEventListener('click', openWingetModal);
+            document.getElementById('modal-close-winget').addEventListener('click', () => wingetModal.classList.add('hidden'));
+
+            // Winget Options Checkboxes
+            document.getElementById('winget-opt-silent').addEventListener('change', updateWingetScriptOutput);
+            document.getElementById('winget-opt-agreements').addEventListener('change', updateWingetScriptOutput);
+
+            // Copy Winget Command
+            document.getElementById('btn-copy-winget').addEventListener('click', () => {
+                const code = wingetCodeOutput.textContent;
+                copyToClipboard(code);
+                showToast('Winget command copied to clipboard!');
+            });
+
+            // Download .bat File
+            document.getElementById('btn-download-bat').addEventListener('click', downloadBatFile);
+
+            // Export Checklist Button
+            document.getElementById('btn-export-list').addEventListener('click', exportSelectedList);
+
+            // Close Modal on Overlay Click
+            wingetModal.addEventListener('click', (e) => {
+                if (e.target === wingetModal) wingetModal.classList.add('hidden');
+            });
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) detailModal.classList.add('hidden');
+            });
+            document.getElementById('modal-close-detail').addEventListener('click', () => detailModal.classList.add('hidden'));
+        }
+
+        // Open Winget Modal
+        function openWingetModal() {
+            updateWingetScriptOutput();
+            wingetModal.classList.remove('hidden');
+        }
+
+        // Update Winget Command Text
+        function updateWingetScriptOutput() {
+            const silent = document.getElementById('winget-opt-silent').checked;
+            const agreements = document.getElementById('winget-opt-agreements').checked;
+
+            const selectedList = Array.from(selectedApps)
+                .map(id => SOFTWARE_DATA.find(a => a.id === id))
+                .filter(a => a && a.wingetId);
+
+            if (selectedList.length === 0) {
+                wingetCodeOutput.textContent = '# No selected software has a valid Winget package ID.';
+                return;
+            }
+
+            let flags = '-e';
+            if (silent) flags += ' --silent';
+            if (agreements) flags += ' --accept-package-agreements --accept-source-agreements';
+
+            const commands = selectedList.map(a => `winget install ${flags} --id ${a.wingetId}`);
+            
+            wingetCodeOutput.textContent = `@echo off\nREM FOSS Hub Batch Software Installation Script\n\n` + commands.join('\n');
+        }
+
+        // Download .bat File
+        function downloadBatFile() {
+            const text = wingetCodeOutput.textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'install_foss_software.bat';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Downloaded install_foss_software.bat');
+        }
+
+        // Export Selected List
+        function exportSelectedList() {
+            const selectedList = Array.from(selectedApps)
+                .map(id => SOFTWARE_DATA.find(a => a.id === id))
+                .filter(Boolean);
+
+            const content = {
+                title: 'FOSS Hub Selected Software Checklist',
+                date: new Date().toISOString().split('T')[0],
+                total: selectedList.length,
+                apps: selectedList.map(a => ({
+                    name: a.name,
+                    category: a.category,
+                    replaces: a.replaces,
+                    license: a.license,
+                    website: a.website,
+                    wingetId: a.wingetId || 'N/A'
+                }))
+            };
+
+            const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'software-checklist.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Exported software list to JSON');
+        }
+
+        // Open Detail Modal
+        function openDetailModal(app) {
+            const body = document.getElementById('detail-modal-body');
+            body.innerHTML = `
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-2xl text-indigo-400">
+                        <i class="fa-solid ${app.icon}"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-white">${app.name}</h2>
+                        <div class="flex items-center space-x-2 text-xs mt-1">
+                            <span class="px-2 py-0.5 rounded-full font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">${app.license}</span>
+                            <span class="text-slate-400 font-mono"><i class="fa-solid fa-clock mr-1"></i>Video: ${app.videoTimestamp}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs text-slate-300 mb-6">
+                    <p class="leading-relaxed bg-slate-950 p-3 rounded-xl border border-slate-800">${app.desc}</p>
+                    
+                    <div class="flex justify-between items-center py-1 border-b border-slate-800">
+                        <span class="text-slate-400">Replaces Proprietary Tool:</span>
+                        <span class="font-semibold text-indigo-300">${app.replaces}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center py-1 border-b border-slate-800">
+                        <span class="text-slate-400">Supported Platforms:</span>
+                        <span class="font-semibold text-slate-200">${app.platforms.join(', ')}</span>
+                    </div>
+
+                    ${app.wingetId ? `
+                    <div class="flex justify-between items-center py-1 border-b border-slate-800">
+                        <span class="text-slate-400">Winget Package ID:</span>
+                        <code class="text-indigo-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 font-mono">${app.wingetId}</code>
+                    </div>
+                    ` : ''}
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <a href="${app.website}" target="_blank" rel="noopener" class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs text-center transition-colors">
+                        Visit Official Website
+                    </a>
+                </div>
+            `;
+            detailModal.classList.remove('hidden');
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'glass-panel text-slate-100 text-xs px-4 py-3 rounded-xl shadow-xl border border-indigo-500/40 flex items-center space-x-2 transition-all duration-300 opacity-0 transform translate-x-10 pointer-events-auto';
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                <span>${message}</span>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-x-10');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Copy to Clipboard (Fallback compatible)
+        function copyToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // Boot on Window Load
+        window.onload = initApp;
+    </script>
+</body>
+</html>
